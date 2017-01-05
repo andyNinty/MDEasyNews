@@ -11,6 +11,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import com.jcodecraeer.xrecyclerview.ProgressStyle;
 import com.jcodecraeer.xrecyclerview.XRecyclerView;
@@ -85,7 +86,11 @@ public class NewsFragment extends LazyFragment implements INewsView,
 
     @Override
     public void showSuccessMsg() {
-        mAdapter.addList(mLists);
+        if (mLists != null) {
+            mAdapter.addList(mLists);
+        } else {
+            Toast.makeText(getActivity(), "api访问次数已达上限", Toast.LENGTH_SHORT).show();
+        }
 //        mAdapter.notifyDataSetChanged();
         mRecyclerView.loadMoreComplete();
     }
